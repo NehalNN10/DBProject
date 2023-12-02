@@ -11,9 +11,11 @@ from PyQt6.QtWidgets import (
     QHeaderView,
 )
 
-from welcome import welcomeScreenSL
+from welcome_sl import welcomeScreenSL
+from welcome_student import welcomeScreenStudent
 from db_manager import db_manager
 import sys
+
 
 class Login(QtWidgets.QMainWindow):
     def __init__(self):
@@ -26,19 +28,25 @@ class Login(QtWidgets.QMainWindow):
 
     def loginBtn(self):
         # ? determining user type
-        temp = self.userID.toPlainText().strip().split("@")
-        if temp[1][:2] == "st":
-            usertype = "Student"
-        else:
-            usertype = "SL"
-        del temp
-        print(usertype)
+        if "@" in self.userID.toPlainText():
+            temp = self.userID.toPlainText().strip().split("@")
+            username = temp[0]
+            if temp[1][:2] == "st":
+                usertype = "Student"
+            else:
+                usertype = "SL"
+            del temp
+            print(usertype)
 
-        # printing out password for testing purposes
-        print(self.passwordEntry.text())
+            # printing out password for testing purposes
+            print(self.passwordEntry.text())
+            self.hide()
+            if usertype == "SL":
+                self.club_info = welcomeScreenSL(username)
+            else:
+                self.club_info = welcomeScreenStudent(username)
+            self.club_info.show()
+        else:
+            print("Invalid email, please re-enter!")
         self.userID.setPlainText("")
         self.passwordEntry.setText("")
-
-        self.hide()
-        self.club_info = welcomeScreenSL()
-        self.club_info.show()

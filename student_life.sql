@@ -127,8 +127,8 @@ ALTER TABLE [Resource_Request] ADD CONSTRAINT [Resource_Request_fk2] FOREIGN KEY
 
 ALTER TABLE [Teams] ADD CONSTRAINT [Teams_fk0] FOREIGN KEY ([Team_ID]) REFERENCES [Club_Teams]([Team_ID]) ON UPDATE CASCADE;
 
-ALTER TABLE [Club_Teams] ADD CONSTRAINT [Club_Teams_fk0] FOREIGN KEY ([Team_ID]) REFERENCES [Teams]([Team_ID]) ON UPDATE CASCADE;
-ALTER TABLE [Club_Teams] ADD CONSTRAINT [Club_Teams_fk1] FOREIGN KEY ([Club_Name]) REFERENCES [Clubs]([Club_Name]) ON UPDATE CASCADE;
+ALTER TABLE [Club_Teams] ADD CONSTRAINT [Club_Teams_fk0] FOREIGN KEY ([Team_ID]) REFERENCES [Teams]([Team_ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [Club_Teams] ADD CONSTRAINT [Club_Teams_fk1] FOREIGN KEY ([Club_Name]) REFERENCES [Clubs]([Club_Name]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE [Borrowed_Resources] ADD CONSTRAINT [Borrowed_Resources_fk0] FOREIGN KEY ([Resource_ID]) REFERENCES [Resources]([Resource_ID]) ON UPDATE CASCADE;
 ALTER TABLE [Borrowed_Resources] ADD CONSTRAINT [Borrowed_Resources_fk1] FOREIGN KEY ([Borrower_ID]) REFERENCES [Borrower]([Borrower_ID]) ON UPDATE CASCADE;
@@ -138,11 +138,11 @@ ALTER TABLE [Member_Attendance] ADD CONSTRAINT [Member_Attendance_fk0] FOREIGN K
 ALTER TABLE [Member_Attendance] ADD CONSTRAINT [Member_Attendance_fk1] FOREIGN KEY ([Student_ID]) REFERENCES [Students]([Student_ID]) ON UPDATE CASCADE;
 
 ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk0] FOREIGN KEY ([Club_Name]) REFERENCES [Clubs]([Club_Name]) ON UPDATE CASCADE;
-ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk1] FOREIGN KEY ([Date]) REFERENCES [Events]([Date]) ON UPDATE CASCADE;
-ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk2] FOREIGN KEY ([Time]) REFERENCES [Events]([Time]) ON UPDATE CASCADE;
-ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk3] FOREIGN KEY ([Location]) REFERENCES [Events]([Location]) ON UPDATE CASCADE;
-ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk4] FOREIGN KEY ([Budget]) REFERENCES [Events]([Budget]) ON UPDATE CASCADE;
-ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk5] FOREIGN KEY ([Approving_staff_ID]) REFERENCES [StudentLife_Staff]([Staff_ID]) ON UPDATE CASCADE;
+--ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk1] FOREIGN KEY ([Date]) REFERENCES [Events]([Date]) ON UPDATE CASCADE;
+--ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk2] FOREIGN KEY ([Time]) REFERENCES [Events]([Time]) ON UPDATE CASCADE;
+--ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk3] FOREIGN KEY ([Location]) REFERENCES [Events]([Location]) ON UPDATE CASCADE;
+--ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk4] FOREIGN KEY ([Budget]) REFERENCES [Events]([Budget]) ON UPDATE CASCADE;
+--ALTER TABLE [Event_Request] ADD CONSTRAINT [Event_Request_fk5] FOREIGN KEY ([Approving_staff_ID]) REFERENCES [StudentLife_Staff]([Staff_ID]) ON UPDATE CASCADE;
 
 ALTER TABLE [Borrower] ADD CONSTRAINT [Borrower_fk0] FOREIGN KEY ([Team_ID]) REFERENCES [Teams]([Team_ID]) ON UPDATE CASCADE;
 ALTER TABLE [Borrower] ADD CONSTRAINT [Borrower_fk1] FOREIGN KEY ([Club_Name]) REFERENCES [Clubs]([Club_Name]) ON UPDATE CASCADE;
