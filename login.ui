@@ -14,7 +14,7 @@
    <string>Login</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="userID">
     <property name="geometry">
      <rect>
       <x>30</x>

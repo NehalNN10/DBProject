@@ -1,10 +1,15 @@
+# Importing essential modules
+from PyQt6.QtWidgets import QApplication
+
+from login import Login
 import sys
-from PyQt6 import QtWidgets
-from welcome_s import Welcome_S
-from update_finances_window import UpdateFinancesWindow
-# Import other classes as needed
-if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    window = Welcome_S()
+
+def main():
+    app = QApplication(sys.argv)
+    window = Login()
     window.show()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()
