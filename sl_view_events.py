@@ -1,5 +1,14 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTableWidget, QTableWidgetItem, QWidget
+from PyQt6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QVBoxLayout,
+    QLabel,
+    QTableWidget,
+    QTableWidgetItem,
+    QWidget,
+)
+
 
 class PastEventsWindow(QMainWindow):
     def __init__(self):
@@ -14,7 +23,9 @@ class PastEventsWindow(QMainWindow):
 
         self.table_widget = QTableWidget()
         self.table_widget.setColumnCount(6)
-        self.table_widget.setHorizontalHeaderLabels(["Club Name", "Location", "Date", "Time", "Budget", "Feedback"])
+        self.table_widget.setHorizontalHeaderLabels(
+            ["Club Name", "Location", "Date", "Time", "Budget", "Feedback"]
+        )
 
         layout.addWidget(QLabel("Past Events"))
         layout.addWidget(self.table_widget)
@@ -26,9 +37,30 @@ class PastEventsWindow(QMainWindow):
     def populate_table(self):
         # Dummy data for past events (replace with data from your database)
         past_events = [
-            {"club_name": "Science Club", "location": "Auditorium", "date": "2023-11-10", "time": "10:00 AM", "budget": "$500", "feedback": "Good"},
-            {"club_name": "Literature Club", "location": "Library", "date": "2023-11-15", "time": "2:00 PM", "budget": "$300", "feedback": "Excellent"},
-            {"club_name": "Music Club", "location": "Open Ground", "date": "2023-11-20", "time": "5:00 PM", "budget": "$700", "feedback": "Satisfactory"}
+            {
+                "club_name": "Science Club",
+                "location": "Auditorium",
+                "date": "2023-11-10",
+                "time": "10:00 AM",
+                "budget": "$500",
+                "feedback": "Good",
+            },
+            {
+                "club_name": "Literature Club",
+                "location": "Library",
+                "date": "2023-11-15",
+                "time": "2:00 PM",
+                "budget": "$300",
+                "feedback": "Excellent",
+            },
+            {
+                "club_name": "Music Club",
+                "location": "Open Ground",
+                "date": "2023-11-20",
+                "time": "5:00 PM",
+                "budget": "$700",
+                "feedback": "Satisfactory",
+            },
         ]
 
         self.table_widget.setRowCount(len(past_events))
@@ -40,11 +72,12 @@ class PastEventsWindow(QMainWindow):
             self.table_widget.setItem(row, 4, QTableWidgetItem(event["budget"]))
             self.table_widget.setItem(row, 5, QTableWidgetItem(event["feedback"]))
 
-def main():
-    app = QApplication(sys.argv)
-    window = PastEventsWindow()
-    window.show()
-    sys.exit(app.exec_())
 
-if __name__ == "__main__":
-    main()
+# def main():
+#     app = QApplication(sys.argv)
+#     window = PastEventsWindow()
+#     window.show()
+#     sys.exit(app.exec())
+
+# if __name__ == "__main__":
+#     main()

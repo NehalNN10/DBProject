@@ -1,6 +1,17 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QTableWidget, QTableWidgetItem, QWidget, QComboBox, QPushButton
+from PyQt6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QVBoxLayout,
+    QLabel,
+    QTableWidget,
+    QTableWidgetItem,
+    QWidget,
+    QComboBox,
+    QPushButton,
+)
 import matplotlib.pyplot as plt
+
 
 class FinancialDashboard(QMainWindow):
     def __init__(self):
@@ -14,13 +25,17 @@ class FinancialDashboard(QMainWindow):
         layout = QVBoxLayout()
 
         self.club_dropdown = QComboBox()
-        self.club_dropdown.addItems(["Science Club", "Literature Club", "Music Club"])  # Add club names
+        self.club_dropdown.addItems(
+            ["Science Club", "Literature Club", "Music Club"]
+        )  # Add club names
         self.club_dropdown.currentIndexChanged.connect(self.populate_table)
 
         self.table_widget = QTableWidget()
         self.table_widget.setColumnCount(3)
-        self.table_widget.setHorizontalHeaderLabels(["Purpose", "Amount", "Final Balance"])
-        
+        self.table_widget.setHorizontalHeaderLabels(
+            ["Purpose", "Amount", "Final Balance"]
+        )
+
         self.graph_button = QPushButton("Show Graph")
         self.graph_button.clicked.connect(self.show_graph)
 
@@ -37,9 +52,23 @@ class FinancialDashboard(QMainWindow):
     def populate_table(self):
         # Dummy financial data (replace with data from your database based on the selected club)
         club_finances = {
-            "Science Club": [("Equipment Purchase", -500), ("Event Earnings", 800), ("Event Expenses", -300), ("Donation", 200)],
-            "Literature Club": [("Book Purchase", -400), ("Workshop Expenses", -200), ("Membership Fee", 100)],
-            "Music Club": [("Instrument Rental", -600), ("Concert Earnings", 1000), ("Concert Expenses", -400), ("Sponsorship", 300)]
+            "Science Club": [
+                ("Equipment Purchase", -500),
+                ("Event Earnings", 800),
+                ("Event Expenses", -300),
+                ("Donation", 200),
+            ],
+            "Literature Club": [
+                ("Book Purchase", -400),
+                ("Workshop Expenses", -200),
+                ("Membership Fee", 100),
+            ],
+            "Music Club": [
+                ("Instrument Rental", -600),
+                ("Concert Earnings", 1000),
+                ("Concert Expenses", -400),
+                ("Sponsorship", 300),
+            ],
         }
 
         selected_club = self.club_dropdown.currentText()
@@ -60,22 +89,34 @@ class FinancialDashboard(QMainWindow):
             return
 
         x_labels = [data[0] for data in self.financial_data]
-        y_values = [int(data[1]) for data in self.financial_data]  # Use the final balance data
+        y_values = [
+            int(data[1]) for data in self.financial_data
+        ]  # Use the final balance data
 
         plt.figure(figsize=(8, 5))
-        plt.plot(x_labels, y_values, marker='o', color='skyblue', linestyle='-', linewidth=2, markersize=8)
-        plt.xlabel('Purpose')
-        plt.ylabel('Amount ($)')
-        plt.title('Financial Distribution and Final Balance')
+        plt.plot(
+            x_labels,
+            y_values,
+            marker="o",
+            color="skyblue",
+            linestyle="-",
+            linewidth=2,
+            markersize=8,
+        )
+        plt.xlabel("Purpose")
+        plt.ylabel("Amount ($)")
+        plt.title("Financial Distribution and Final Balance")
         plt.xticks(rotation=45)
         plt.tight_layout()
         plt.show()
 
-def main():
-    app = QApplication(sys.argv)
-    window = FinancialDashboard()
-    window.show()
-    sys.exit(app.exec_())
 
-if __name__ == "__main__":
-    main()
+# def main():
+#     app = QApplication(sys.argv)
+#     window = FinancialDashboard()
+#     window.show()
+#     sys.exit(app.exec())
+
+
+# if __name__ == "__main__":
+#     main()

@@ -1,25 +1,34 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QComboBox, QTextEdit, QPushButton, QVBoxLayout
+from PyQt6.QtWidgets import (
+    QApplication,
+    QWidget,
+    QLabel,
+    QComboBox,
+    QTextEdit,
+    QPushButton,
+    QVBoxLayout,
+)
+
 
 class EventFeedbackWindow(QWidget):
-    def __init__(self, student_id):
+    def __init__(self):
         super().__init__()
-        self.student_id = student_id
+        self.student_id = 'S1223'
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle('Event Feedback')
+        self.setWindowTitle("Event Feedback")
         self.setGeometry(100, 100, 400, 300)
 
-        self.lbl_student = QLabel(f'Student ID: {self.student_id}')
-        self.lbl_select_event = QLabel('Select the Event:')
+        self.lbl_student = QLabel(f"Student ID: {self.student_id}")
+        self.lbl_select_event = QLabel("Select the Event:")
         self.cb_event = QComboBox()
-        self.cb_event.addItem('DiscO')
-        self.cb_event.addItem('Event 2')
-        self.cb_event.addItem('Event 3')
-        self.lbl_feedback = QLabel('Provide Feedback:')
+        self.cb_event.addItem("DiscO")
+        self.cb_event.addItem("Event 2")
+        self.cb_event.addItem("Event 3")
+        self.lbl_feedback = QLabel("Provide Feedback:")
         self.txt_feedback = QTextEdit()
-        self.btn_submit = QPushButton('Submit Feedback')
+        self.btn_submit = QPushButton("Submit Feedback")
         self.btn_submit.clicked.connect(self.submit_feedback)
 
         layout = QVBoxLayout()
@@ -34,16 +43,6 @@ class EventFeedbackWindow(QWidget):
     def submit_feedback(self):
         selected_event = self.cb_event.currentText()
         feedback_text = self.txt_feedback.toPlainText()
-        print(f'Student ID: {self.student_id}')
-        print(f'Selected Event: {selected_event}')
-        print(f'Feedback: {feedback_text}')
-
-def main():
-    app = QApplication(sys.argv)
-    student_id = 'S12345'
-    window = EventFeedbackWindow(student_id)
-    window.show()
-    sys.exit(app.exec_())
-
-if __name__ == '__main__':
-    main()
+        print(f"Student ID: {self.student_id}")
+        print(f"Selected Event: {selected_event}")
+        print(f"Feedback: {feedback_text}")

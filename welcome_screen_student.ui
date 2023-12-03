@@ -14,7 +14,7 @@
    <string>SL Office DBMS</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="viewResources">
+   <widget class="QPushButton" name="viewBorrowedResources">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -50,7 +50,7 @@
      <string>SL OFFICE DATABASE, ALL RIGHTS RESERVED 2023</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_4">
+   <widget class="QPushButton" name="requestResource">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -68,7 +68,7 @@
      <string>Request resource</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_5">
+   <widget class="QPushButton" name="requestEvent">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -86,7 +86,7 @@
      <string>Request event</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_3">
+   <widget class="QPushButton" name="eventFeedback">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -122,7 +122,7 @@
      <string>Welcome, {User_name}</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_2">
+   <widget class="QPushButton" name="viewAttendance">
     <property name="geometry">
      <rect>
       <x>40</x>

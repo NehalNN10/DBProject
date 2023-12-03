@@ -68,7 +68,7 @@
      <string>View Resources</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_2">
+   <widget class="QPushButton" name="viewEvents">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -86,7 +86,7 @@
      <string>View Events</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_3">
+   <widget class="QPushButton" name="viewClubs">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -104,7 +104,7 @@
      <string>View Clubs</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_4">
+   <widget class="QPushButton" name="resourceRequests">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -122,7 +122,7 @@
      <string>Resource Requests</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_5">
+   <widget class="QPushButton" name="eventRequests">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -140,7 +140,7 @@
      <string>Event Requests</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewResources_6">
+   <widget class="QPushButton" name="clubFinances">
     <property name="geometry">
      <rect>
       <x>370</x>
