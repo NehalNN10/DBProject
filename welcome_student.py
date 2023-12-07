@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication
 
 
 from borrow_resource_window import BorrowResourceWindow
-from resource_request_window import ResourceRequestWindow
+from student_account_window import StudentAccountWindow
 from event_input import EventInput
 from view_attendance import ViewAttendanceWindow
 from event_feedback_window import EventFeedbackWindow

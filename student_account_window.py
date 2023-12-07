@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QApplication,
     QWidget,
     QLabel,
@@ -8,11 +8,14 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
 )
 
+from db_manager import db_manager
+
 
 class StudentAccountWindow(QWidget):
-    def __init__(self, student_id):
+    def __init__(self):
         super().__init__()
-        self.student_id = student_id
+        self.student_id = "S1234"
+        self.db = db_manager()
         self.init_ui()
 
     def init_ui(self):
@@ -33,6 +36,36 @@ class StudentAccountWindow(QWidget):
             },
         ]
 
+        # ? fetching from database
+        self.db.connect()
+        self.db.cursor.execute(
+            """
+            SELECT *
+            FROM Borrowed_Resources
+            WHERE Borrower_ID in
+            (
+            SELECT Borrower_ID
+            FROM Borrower
+            WHERE Student_ID = 1
+            );
+            """
+            # need to fix the checking of student-id
+        )
+
+        # print(self.db.cursor.fetchall())
+
+        for row_index, row_data in enumerate(self.db.cursor.fetchall()):
+            print(row_index, row_data)
+            borrowed_resources.append(
+                {
+                    "resource_id": str(row_data[1]).zfill(3),
+                    "resource_name": "Joe mama",
+                    "due_date": row_data[3].strftime("%Y-%M-%D"),
+                }
+            )
+
+        # borrowed_resources = None
+
         self.lbl_account = QLabel(f"Student Account: {self.student_id}")
         self.table_account = QTableWidget()
         self.table_account.setColumnCount(3)
@@ -40,6 +73,8 @@ class StudentAccountWindow(QWidget):
             ["Resource ID", "Resource Name", "Due Date"]
         )
         self.table_account.setRowCount(len(borrowed_resources))
+
+        self.db.close_connection()
 
         for row, resource in enumerate(borrowed_resources):
             self.table_account.setItem(

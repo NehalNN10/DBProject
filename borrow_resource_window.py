@@ -10,6 +10,14 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
+from datetime import date
+
+from db_manager import db_manager
+
+
+def date_converter(QDate):
+    return date(QDate.year(), QDate.month(), QDate.day())
+
 
 class BorrowResourceWindow(QMainWindow):
     def __init__(self, student_id="S12345"):
@@ -17,6 +25,7 @@ class BorrowResourceWindow(QMainWindow):
         self.student_id = student_id
         self.resource_names = ["Resource 1", "Resource 2", "Resource 3"]
         self.init_ui()
+        self.db = db_manager()
 
     def init_ui(self):
         self.setWindowTitle("Borrow a Resource")
@@ -45,19 +54,21 @@ class BorrowResourceWindow(QMainWindow):
         central_widget.setLayout(layout)
 
     def borrow_resource(self):
+        self.db.connect()
         selected_resource = self.cb_resource_names.currentText()
-        due_date = self.calendar_due_date.selectedDate().toString("yyyy-MM-dd")
+        due_date = date_converter(self.calendar_due_date.selectedDate())
         print(f"Student ID: {self.student_id}")
         print(f"Selected Resource: {selected_resource}")
-        print(f"Tentative Due Date: {due_date}")
+        # print(f"Tentative Due Date: {due_date.strftime("%Y-%m-%d")}")
+        self.db.cursor.execute(
+            """
+            INSERT INTO Resource_Request([Resource_Request_ID], [Resource_ID],[Borrower_ID], [Due_Date], [Approved])
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (0, 1, 69, due_date, 0)
+        )
 
+        self.db.commit()
 
-# def main():
-#     app = QApplication(sys.argv)
-#     student_id = 'S12345'
-#     window = BorrowResourceWindow(student_id)
-#     window.show()
-#     sys.exit(app.exec())
-
-# if __name__ == '__main__':
-#     main()
+        # TODO: find out how auto-increment works
+        self.db.close_connection()
