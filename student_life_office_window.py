@@ -9,6 +9,9 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
 )
 
+from datetime import datetime
+from db_manager import db_manager
+
 
 class StudentLifeOfficeWindow(QWidget):
     def __init__(self):
@@ -20,6 +23,8 @@ class StudentLifeOfficeWindow(QWidget):
         self.setGeometry(100, 100, 600, 400)
 
         layout = QVBoxLayout()
+
+        self.db = db_manager()
 
         self.lbl_requests = QLabel("Pending Requests:")
         layout.addWidget(self.lbl_requests)
@@ -38,6 +43,7 @@ class StudentLifeOfficeWindow(QWidget):
         layout.addWidget(self.btn_reject)
 
         self.setLayout(layout)
+        self.load_requests()
 
     def load_requests(self):
         requests = [
@@ -54,6 +60,22 @@ class StudentLifeOfficeWindow(QWidget):
                 "due_date": "10/18/2023",
             },
         ]
+
+        self.db.connect()
+
+        self.db.cursor.execute("SELECT * FROM Resource_Request")
+
+        for row_data in self.db.cursor.fetchall():
+            requests.append(
+                {
+                    "request_id": row_data[0],
+                    "resource_id": row_data[1],
+                    "borrower_id": row_data[2],
+                    "due_date": row_data[3].strftime("%Y-%m-%d"),
+                }
+            )
+
+        self.db.close_connection()
         self.table_requests.setRowCount(len(requests))
         for i, request in enumerate(requests):
             self.table_requests.setItem(

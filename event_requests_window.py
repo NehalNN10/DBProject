@@ -10,11 +10,13 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
 )
 
+from db_manager import db_manager
 
 class EventRequestsWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.init_ui()
+        self.db = db_manager()
 
     def init_ui(self):
         self.setWindowTitle("Event Requests")
