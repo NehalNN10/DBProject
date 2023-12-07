@@ -48,12 +48,12 @@ class UpdateFinancesWindow(QMainWindow):
         self.db.connect()
         self.db.cursor.execute(
             """
-            UPDATE Club_Funds_Tracker
-            SET Amount = Amount + ?, Reason = ?
-            WHERE Club_Name = ?
+            INSERT INTO Club_Funds_Tracker(Club_Name, Amount, Reason)
+            VALUES (?,?,?)
             """,
-            (Decimal(amount), reason, selected_club),
+            (selected_club, Decimal(amount), reason),
         )
+
         self.db.cursor.commit()
         self.db.close_connection()
         print("Amount:", amount)

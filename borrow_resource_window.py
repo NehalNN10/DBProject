@@ -23,7 +23,7 @@ class BorrowResourceWindow(QMainWindow):
     def __init__(self, student_id="S12345"):
         super().__init__()
         self.student_id = student_id
-        self.resource_names = ["Resource 1", "Resource 2", "Resource 3"]
+        self.resource_names = ["1", "2", "3"]
         self.init_ui()
         self.db = db_manager()
 
@@ -62,10 +62,10 @@ class BorrowResourceWindow(QMainWindow):
         # print(f"Tentative Due Date: {due_date.strftime("%Y-%m-%d")}")
         self.db.cursor.execute(
             """
-            INSERT INTO Resource_Request([Resource_Request_ID], [Resource_ID],[Borrower_ID], [Due_Date], [Approved])
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO Resource_Request([Resource_ID],[Borrower_ID], [Due_Date], [Approved])
+            VALUES (?, ?, ?, ?)
             """,
-            (0, 1, 69, due_date, 0)
+            (selected_resource, 69, due_date, 0)
         )
 
         self.db.commit()

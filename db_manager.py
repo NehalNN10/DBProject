@@ -20,7 +20,7 @@ class db_manager(QtWidgets.QMainWindow):
     # server = 'HU-DOPX-GCL11\MSSQLSERVER02'
     server = "CTRL-ALT-DEL\SPARTA"  # specific to my machine only
     # database = "Student Life"  # Name of your Northwind database
-    database = "Trial database"  # Name of your Northwind database
+    database = "Try"  # Name of your Northwind database
     # use_windows_authentication = False  # Set to True to use Windows Authentication
     use_windows_authentication = True  # Set to True to use Windows Authentication
     username = "sa"  # Specify a username if not using Windows Authentication

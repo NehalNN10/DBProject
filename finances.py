@@ -31,7 +31,7 @@ class FinancialDashboard(QMainWindow):
 
         self.db.connect()
 
-        self.db.cursor.execute("SELECT Club_Name FROM Club_Funds_Tracker")
+        self.db.cursor.execute("SELECT DISTINCT Club_Name FROM Club_Funds_Tracker")
 
         clubs = []
         for row_data in self.db.cursor.fetchall():
@@ -69,30 +69,30 @@ class FinancialDashboard(QMainWindow):
     def populate_table(self):
         # Dummy financial data (replace with data from your database based on the selected club)
         club_finances = {
-            "Science Club": [
-                ("Equipment Purchase", -500),
-                ("Event Earnings", 800),
-                ("Event Expenses", -300),
-                ("Donation", 200),
-            ],
-            "Literature Club": [
-                ("Book Purchase", -400),
-                ("Workshop Expenses", -200),
-                ("Membership Fee", 100),
-            ],
-            "Music Club": [
-                ("Instrument Rental", -600),
-                ("Concert Earnings", 1000),
-                ("Concert Expenses", -400),
-                ("Sponsorship", 300),
-            ],
+            # "Science Club": [
+            #     ("Equipment Purchase", -500),
+            #     ("Event Earnings", 800),
+            #     ("Event Expenses", -300),
+            #     ("Donation", 200),
+            # ],
+            # "Literature Club": [
+            #     ("Book Purchase", -400),
+            #     ("Workshop Expenses", -200),
+            #     ("Membership Fee", 100),
+            # ],
+            # "Music Club": [
+            #     ("Instrument Rental", -600),
+            #     ("Concert Earnings", 1000),
+            #     ("Concert Expenses", -400),
+            #     ("Sponsorship", 300),
+            # ],
         }
 
         # db part for retrieving finance details
 
         self.db.connect()
 
-        self.db.cursor.execute("SELECT * FROM Club_Funds_Tracker")
+        self.db.cursor.execute("SELECT DISTINCT CLUB_NAME, AMOUNT, REASON FROM Club_Funds_Tracker")
 
         # for row_index, row_data in enumerate(self.db.cursor.fetchall()):
         #     print(row_data)
@@ -115,6 +115,9 @@ class FinancialDashboard(QMainWindow):
 
         self.table_widget.setRowCount(len(finances))
         final_balance = 0
+
+        print(finances)
+
         for row, (purpose, amount) in enumerate(finances):
             final_balance += amount
             self.table_widget.setItem(row, 0, QTableWidgetItem(purpose))
